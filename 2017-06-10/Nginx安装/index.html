@@ -10,7 +10,7 @@
   
   <title>
     
-      Hello World | jun&#39;s studio
+      Nginx 安装 | jun&#39;s studio
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -112,8 +112,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Hello World</h2>
-  <p class="post-date">2016-06-10</p>
+  <h2>Nginx 安装</h2>
+  <p class="post-date">2017-06-10</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -121,27 +121,82 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    <section class="markdown-content"><h1 id="nginx安装和配置"><a href="#nginx安装和配置" class="headerlink" title="nginx安装和配置"></a>nginx安装和配置</h1><h2 id="nginx安装"><a href="#nginx安装" class="headerlink" title="nginx安装"></a>nginx安装</h2><p>nginx依赖以下模块:</p>
+<ul>
+<li>gzip模块需要<strong>zlib</strong>库</li>
+<li>rewrite模块需要<strong>pcre</strong>库</li>
+<li>ssl 功能需要<strong>openssl</strong>库</li>
+</ul>
+<ol>
+<li><p><strong>安装pcre</strong></p>
+<ol>
+<li>获取pcre编译安装包，在<a href="http://www.pcre.org/" target="_blank" rel="noopener">http://www.pcre.org/</a>上可以获取当前最新的版本。</li>
+<li>解压缩pcre-xx.tar.gz包。</li>
+<li>进入解压缩目录，执行<code>./configure &amp;&amp; make &amp;&amp; make install</code></li>
+</ol>
+</li>
+<li><p><strong>安装openssl</strong></p>
+<ol>
+<li>获取openssl编译安装包，在<a href="http://www.openssl.org/source/" target="_blank" rel="noopener">http://www.openssl.org/source/</a>上可以获取当前最新的版本。</li>
+<li>解压缩openssl-xx.tar.gz包。</li>
+<li>进入解压缩目录，执行<code>./configure &amp;&amp; make &amp;&amp; make install</code></li>
+</ol>
+</li>
+<li><p><strong>安装zlib</strong></p>
+<ol>
+<li>获取zlib编译安装包，在<a href="http://www.zlib.net/" target="_blank" rel="noopener">http://www.zlib.net/</a>上可以获取当前最新的版本。</li>
+<li>解压缩openssl-xx.tar.gz包。</li>
+<li>进入解压缩目录，执行<code>./configure &amp;&amp; make &amp;&amp; make install</code></li>
+</ol>
+</li>
+<li><p><strong>安装nginx</strong></p>
+<ol>
+<li>获取nginx，在<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a>上可以获取当前最新的版本。</li>
+<li>解压缩nginx-xx.tar.gz包。</li>
+<li>进入解压缩目录，执行<code>./configure &amp;&amp; make &amp;&amp; make install</code></li>
+</ol>
+</li>
+</ol>
+<p><strong>note:</strong> 若安装时找不到上述依赖模块，使用–with-openssl=<openssl_dir>、–with-pcre=<pcre_dir>、–with-zlib=<zlib_dir>指定依赖的模块目录。如已安装过，此处的路径为安装目录；若未安装，则此路径为编译安装包路径，nginx将执行模块的默认编译安装。</zlib_dir></pcre_dir></openssl_dir></p>
+<p><strong>Error:</strong><br><em>src/core/ngx_regex.h:15:18: fatal error: pcre.h: No such file or directory</em><br><strong>Solution</strong><br><code>apt-get install libpcre3-dev</code>, 编译时需要去掉–with-pcre=<pcre_dir></pcre_dir></p>
+<h2 id="nginx-使用"><a href="#nginx-使用" class="headerlink" title="nginx 使用"></a>nginx 使用</h2><h3 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/nginx/sbin</span><br><span class="line">./nginx</span><br></pre></td></tr></table></figure>
+<p><strong>note</strong>：添加niginx路径至/etc/profile 可以在任意位置执行nginx命令</p>
+<p><strong>若出现Error:</strong> <em>libpcre.so.1: cannot open shared object file</em><br><strong>解决方案:</strong><br>64位系统： <code>ln -s /usr/local/lib/libpcre.so.1 /lib64</code><br>32位系统： <code>ln -s /usr/local/lib/libpcre.so.1 /lib</code></p>
+<p>启动nginx之后，浏览器中输入<a href="http://localhost可以验证是否安装启动成功。" target="_blank" rel="noopener">http://localhost可以验证是否安装启动成功。</a></p>
+<p><strong>note:</strong> 若提示没有安装c++编译器，下载新版gcc安装，或<code>apt-get install g\+\+</code>即可</p>
+<ol>
+<li>获取gccl编译安装包，在<a href="http://ftp.gnu.org/gnu/gcc/gcc-5.5.0/" target="_blank" rel="noopener">http://ftp.gnu.org/gnu/gcc/gcc-5.5.0/</a>上可以获取当前最新的版本。</li>
+<li>解压缩gcc-xx.tar.gz包。</li>
+<li>进入解压缩目录，执行<code>./configure &amp;&amp; make &amp;&amp; make install</code></li>
+</ol>
+<h3 id="nginx操作"><a href="#nginx操作" class="headerlink" title="nginx操作"></a>nginx操作</h3><p>nginx的启动后，它可以通过与-s参数执行来控制。使用以下语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s signal</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong><em>stop</em></strong> — 快速关闭</li>
+<li><strong><em>quit</em></strong> — 正常关闭</li>
+<li><strong><em>reload</em></strong> —重新加载配置文件</li>
+<li><strong><em>reopen</em></strong> — 重新打开日志文件</li>
+</ul>
+<p>若关闭nginx进程时，先等工作进程完成后停止，这个命令应该在启动nginx的相同用户下执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s quit</span><br></pre></td></tr></table></figure></p>
+<p>配置文件中的更改不会被立即生效，直到命令重新加载配置或重新启动。重新加载配置，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -t   #测试修改后的配置文件OK，然后再reload</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></p>
+<p>一旦主进程接收重新加载配置的信号，它检查新配置文件语法的正确性并尝试应用配置，如果是一次成功，主进程开始新的工作流程，将消息发到老的工作进程，要求它们关闭，否则，主进程回滚，继续在老的配置下运行。老的工作进程，接收命令进行关闭，停止接收新连接，并继续运行当前的请求，直到所有这些请求结束，在这之后，老的工作进程停止。</p>
+<p>也可以发送到nginx进程的Unix命令工具，如<strong><em>kill</em></strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -s QUIT 1628</span><br></pre></td></tr></table></figure></p>
+<p><strong>Error:</strong><br><em>openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory</em><br><strong>Solution:</strong><br><code>ln -s /usr/local/lib/libssl.so.1.1 /usr/lib/libssl.so.1.1</code><br><code>ln -s /usr/local/lib/libcrypto.so.1.1 /usr/lib/libcrypto.so.1.1</code></p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Movies" >
-    <span class="tag-code">Movies</span>
+  <a href="/tags#Linux" >
+    <span class="tag-code">Linux</span>
   </a>
 
-  <a href="/tags#Life" >
-    <span class="tag-code">Life</span>
+  <a href="/tags#web" >
+    <span class="tag-code">web</span>
+  </a>
+
+  <a href="/tags#Nginx" >
+    <span class="tag-code">Nginx</span>
   </a>
 
       </div>
@@ -169,7 +224,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Quick-Start"><span class="toc-nav-text">Quick Start</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Create-a-new-post"><span class="toc-nav-text">Create a new post</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Run-server"><span class="toc-nav-text">Run server</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Generate-static-files"><span class="toc-nav-text">Generate static files</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Deploy-to-remote-sites"><span class="toc-nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#nginx安装和配置"><span class="toc-nav-text">nginx安装和配置</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#nginx安装"><span class="toc-nav-text">nginx安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#nginx-使用"><span class="toc-nav-text">nginx 使用</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#启动nginx"><span class="toc-nav-text">启动nginx</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#nginx操作"><span class="toc-nav-text">nginx操作</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -179,7 +234,7 @@
 
 <script>
   (function () {
-    var url = 'http://wangjunstudio.com/2016-06-10/hello-world/';
+    var url = 'http://wangjunstudio.com/2017-06-10/Nginx安装/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -235,7 +290,7 @@
     var gitmentConfig = "wangjunemse";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "Hello World",
+        id: "Nginx 安装",
         owner: "wangjunemse",
         repo: "wangjunemse.github.io",
         oauth: {
